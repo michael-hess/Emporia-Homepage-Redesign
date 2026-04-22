@@ -442,7 +442,7 @@ body { background: #fafbff; overflow-x: hidden; }
 .tm-av.agent-av svg { position: relative; z-index: 1; }
 .tm-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .tm-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; opacity: .55; text-transform: uppercase; letter-spacing: .1em; }
-.tm-name { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500; color: #fff; letter-spacing: -.005em; }
+.tm-name { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500; color: #fff; letter-spacing: -.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tm-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; margin-top: 3px; display: flex; align-items: center; gap: 5px; opacity: .75; }
 .tm-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .tm-status.on { color: #34d399; }
@@ -602,6 +602,25 @@ body { background: #fafbff; overflow-x: hidden; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .cta-nl .ticker-bar-inner span { margin: 0 24px; }
 .cta-nl .ticker-bar-inner .n { color: var(--emporia-blue); font-weight: 600; }
+/* ---- Product card micro-animations ---- */
+.product-logo { transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .45s ease; will-change: transform; }
+.product:hover .product-logo { transform: translateY(-2px) scale(1.03); filter: drop-shadow(0 6px 14px rgba(58,41,249,.35)); }
+.product .pviz-attr { opacity: 0; transform: translateY(4px); transition: opacity .5s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.2,.8,.2,1), background-color .25s ease; }
+.product.reveal.in .pviz-attr { opacity: 1; transform: translateY(0); }
+.product.reveal.in .pviz-attr:nth-child(1) { transition-delay: .35s, .35s, 0s; }
+.product.reveal.in .pviz-attr:nth-child(2) { transition-delay: .45s, .45s, 0s; }
+.product.reveal.in .pviz-attr:nth-child(3) { transition-delay: .55s, .55s, 0s; }
+.product.reveal.in .pviz-attr:nth-child(4) { transition-delay: .65s, .65s, 0s; }
+.product:hover .pviz-attr:hover { background: rgba(58,41,249,.18); }
+.pviz-quota-fill { position: relative; overflow: hidden; }
+.pviz-quota-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.22) 50%, transparent 100%); transform: translateX(-120%); animation: bar-shimmer 4.5s ease-in-out 2.2s infinite; }
+@keyframes bar-shimmer { 0%, 10% { transform: translateX(-120%); } 55%, 100% { transform: translateX(260%); } }
+.pviz-polis-graph .endpoint-pulse { fill: none; stroke: var(--mint-pink); stroke-width: 1.2; opacity: 0; animation: endpoint-pulse 2.4s ease-out 2.4s infinite; }
+@keyframes endpoint-pulse { 0% { r: 4; opacity: .6; } 80% { opacity: 0; } 100% { r: 14; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .pviz-quota-fill::after, .pviz-polis-graph .endpoint-pulse { animation: none; }
+  .product .pviz-attr { opacity: 1; transform: none; }
+}
 @media (max-width: 960px) { .hero-split, .cap-head, .cap-display, .products, .testi-head { grid-template-columns: 1fr; } .matrix-grid { grid-template-columns: repeat(2,1fr); } .mx { border-right-width: 1px !important; } .mx:nth-child(2n) { border-right: 0 !important; } }
 </style>
 </head>
@@ -975,7 +994,7 @@ body { background: #fafbff; overflow-x: hidden; }
         <div class="product reveal">
           <span class="product-chip">For Customers</span>
           <img class="product-logo mrx" src="assets/mrxcore-logo.png" alt="mrxCore">
-          <p class="p-tagline">Your B2B audience command center. Built on nearly 800M professional records.</p>
+          <p class="p-tagline">Your B2B research command center. Built on top of over 800M verified professional records.</p>
           <div class="pviz">
             <div class="pviz-head"><span>verified records</span><span class="live">updating</span></div>
             <div>
@@ -994,7 +1013,7 @@ body { background: #fafbff; overflow-x: hidden; }
         <div class="product reveal">
           <span class="product-chip">For Suppliers</span>
           <img class="product-logo levada" src="assets/levada-logo.png" alt="Levada">
-          <p class="p-tagline">Best-in-class audience allocation tooling. Manage traffic, reconcile, and append metadata with clarity.</p>
+          <p class="p-tagline">Connect audiences to premium B2B surveys, expert interviews, and paid actions.</p>
           <div class="pviz">
             <div class="pviz-head"><span>fielding · fintech Q2</span><span class="live">live</span></div>
             <div class="pviz-quota-head"><span class="title">completes</span><span class="total">1,244 / 1,500</span></div>
@@ -1036,6 +1055,7 @@ body { background: #fafbff; overflow-x: hidden; }
                 <path class="fill" d="M 0,88 L 30,82 L 60,74 L 90,68 L 120,60 L 150,46 L 180,40 L 210,30 L 240,22 L 270,14 L 300,8 L 300,100 L 0,100 Z"/>
                 <path class="line" d="M 0,88 L 30,82 L 60,74 L 90,68 L 120,60 L 150,46 L 180,40 L 210,30 L 240,22 L 270,14 L 300,8"/>
                 <circle class="endpoint" cx="300" cy="8"/>
+                <circle class="endpoint-pulse" cx="300" cy="8"/>
               </svg>
             </div>
             <div class="pviz-polis-axis-lbl"><span>jan</span><span>apr</span><span>jul</span><span>oct</span><span>now</span></div>
