@@ -563,26 +563,95 @@ body { background: #fafbff; overflow-x: hidden; }
 .mx:hover { background: var(--light-white); }
 .mx .mx-idx { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .1em; }
 .mx h4 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -.02em; margin: 12px 0 0; color: var(--deep-blue); }
-.mx .mx-visual { flex: 1; margin-top: 18px; position: relative; }
+.mx .mx-visual { flex: 1; margin-top: 18px; position: relative; overflow: hidden; }
+/* 02 · Targeting — always-alive bars with sequential breathe */
 .mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 80px; }
-.mini-bars .b { flex: 1; background: var(--emporia-blue); border-radius: 2px 2px 0 0; opacity: .2; transition: opacity .3s; }
-.mx:hover .mini-bars .b { opacity: 1; }
-.mini-pulse { width: 100%; height: 80px; background: radial-gradient(circle, var(--emporia-blue) 0%, transparent 40%); opacity: .3; animation: pulse-bg 2s ease-in-out infinite; }
-@keyframes pulse-bg { 0%,100% { transform: scale(.8); opacity: .2; } 50% { transform: scale(1); opacity: .6; } }
+.mini-bars .b { flex: 1; background: var(--emporia-blue); border-radius: 2px 2px 0 0; opacity: .55; transform-origin: bottom; animation: bar-breathe 2.8s ease-in-out infinite; }
+.mini-bars .b:nth-child(1) { animation-delay: 0s; }
+.mini-bars .b:nth-child(2) { animation-delay: .28s; }
+.mini-bars .b:nth-child(3) { animation-delay: .56s; }
+.mini-bars .b:nth-child(4) { animation-delay: .84s; }
+.mini-bars .b:nth-child(5) { animation-delay: 1.12s; }
+.mini-bars .b:nth-child(6) { animation-delay: 1.4s; }
+.mini-bars .b:nth-child(7) { animation-delay: 1.68s; }
+.mini-bars .b:nth-child(8) { animation-delay: 1.96s; }
+@keyframes bar-breathe { 0%, 70%, 100% { transform: scaleY(1); opacity: .55; } 35% { transform: scaleY(1.06); opacity: 1; } }
+.mx:hover .mini-bars .b { animation-duration: 1.4s; }
+
+/* 06 · Pori — contained concentric verification pulse */
+.mini-pulse { width: 100%; height: 80px; position: relative; display: flex; align-items: center; justify-content: center; background: none; overflow: hidden; }
+.mini-pulse .core { width: 14px; height: 14px; border-radius: 50%; background: var(--emporia-blue); box-shadow: 0 0 12px rgba(58,41,249,.55); position: relative; z-index: 1; }
+.mini-pulse::before, .mini-pulse::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--emporia-blue); transform: translate(-50%, -50%); animation: pori-ring 2.6s cubic-bezier(.2,.8,.2,1) infinite; pointer-events: none; }
+.mini-pulse::after { animation-delay: 1.3s; }
+@keyframes pori-ring { 0% { transform: translate(-50%, -50%) scale(.8); opacity: .85; } 85%, 100% { transform: translate(-50%, -50%) scale(3); opacity: 0; } }
+
+/* 03 · Respondent — rows with gentle scan shimmer */
 .mini-rows { display: flex; flex-direction: column; gap: 6px; }
-.mini-rows .r { height: 10px; background: rgba(58,41,249,.15); border-radius: 2px; }
-.mini-rows .r:nth-child(1) { width: 85%; } .mini-rows .r:nth-child(2) { width: 60%; } .mini-rows .r:nth-child(3) { width: 92%; } .mini-rows .r:nth-child(4) { width: 45%; }
-.mini-pill { display: inline-block; padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--light-white); color: var(--emporia-blue); margin-right: 4px; margin-bottom: 4px; }
+.mini-rows .r { height: 10px; background: rgba(58,41,249,.15); border-radius: 2px; position: relative; overflow: hidden; }
+.mini-rows .r::after { content: ''; position: absolute; top: 0; left: -45%; width: 45%; height: 100%; background: linear-gradient(90deg, transparent, rgba(58,41,249,.5), transparent); animation: rows-scan 3.8s ease-in-out infinite; }
+.mini-rows .r:nth-child(1) { width: 85%; }
+.mini-rows .r:nth-child(2) { width: 60%; }
+.mini-rows .r:nth-child(2)::after { animation-delay: .3s; }
+.mini-rows .r:nth-child(3) { width: 92%; }
+.mini-rows .r:nth-child(3)::after { animation-delay: .6s; }
+.mini-rows .r:nth-child(4) { width: 45%; }
+.mini-rows .r:nth-child(4)::after { animation-delay: .9s; }
+@keyframes rows-scan { 0% { left: -45%; } 65%, 100% { left: 100%; } }
+
+/* 07 · LinkedIn OAuth — pills stagger-fade on reveal */
+.mini-pill { display: inline-block; padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--light-white); color: var(--emporia-blue); margin-right: 4px; margin-bottom: 4px; opacity: 0; transform: translateY(3px); transition: opacity .35s, transform .35s cubic-bezier(.2,.8,.2,1), background-color .25s; }
+.mx.reveal.in .mini-pill { opacity: 1; transform: translateY(0); }
+.mx.reveal.in .mini-pill:nth-child(1) { transition-delay: .2s, .2s, 0s; }
+.mx.reveal.in .mini-pill:nth-child(2) { transition-delay: .28s, .28s, 0s; }
+.mx.reveal.in .mini-pill:nth-child(3) { transition-delay: .36s, .36s, 0s; }
+.mx.reveal.in .mini-pill:nth-child(4) { transition-delay: .44s, .44s, 0s; }
+.mx.reveal.in .mini-pill:nth-child(5) { transition-delay: .52s, .52s, 0s; }
+.mx.reveal.in .mini-pill:nth-child(6) { transition-delay: .6s, .6s, 0s; }
+.mx:hover .mini-pill { background: rgba(58,41,249,.12); }
+
+/* 05 · IDIs & Groups — spinning ring + concentric radiating waves */
+.mini-circle-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto; }
+.mini-circle-wrap::before, .mini-circle-wrap::after { content: ''; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--emporia-blue); transform: translate(-50%, -50%); animation: circ-wave 2.8s ease-out infinite; pointer-events: none; opacity: 0; }
+.mini-circle-wrap::after { animation-delay: 1.4s; }
+@keyframes circ-wave { 0% { transform: translate(-50%, -50%) scale(.9); opacity: .4; } 85%, 100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; } }
 .mini-circle { width: 80px; height: 80px; border-radius: 50%; border: 2px dashed var(--emporia-blue); position: relative; animation: ring-spin 8s linear infinite; }
-.mini-circle::after { content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--mint-pink); }
+.mini-circle::after { content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--mint-pink); box-shadow: 0 0 10px rgba(255,121,213,.55); }
+
+/* 04 · Survey Builder — tree stagger + blinking caret */
 .mini-tree { display: flex; flex-direction: column; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
-.mini-tree .t { padding-left: calc(var(--d,0)*14px); }
+.mini-tree .t { padding-left: calc(var(--d,0)*14px); opacity: 0; transform: translateX(-4px); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
+.mx.reveal.in .mini-tree .t { opacity: 1; transform: translateX(0); }
+.mx.reveal.in .mini-tree .t:nth-child(1) { transition-delay: .18s; }
+.mx.reveal.in .mini-tree .t:nth-child(2) { transition-delay: .28s; }
+.mx.reveal.in .mini-tree .t:nth-child(3) { transition-delay: .38s; }
+.mx.reveal.in .mini-tree .t:nth-child(4) { transition-delay: .48s; }
+.mx.reveal.in .mini-tree .t:nth-child(5) { transition-delay: .58s; }
 .mini-tree .t::before { content: '└── '; opacity: .5; }
 .mini-tree .t:first-child::before { content: ''; }
-.mini-digits { font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.04em; color: var(--emporia-blue); line-height: 1; }
+.mini-tree .t:last-child::after { content: '▋'; color: var(--emporia-blue); margin-left: 4px; animation: tree-blink 1s step-end infinite; }
+@keyframes tree-blink { 50% { opacity: 0; } }
+
+/* 01 · Incentive — digits gently scale on hover */
+.mini-digits { font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.04em; color: var(--emporia-blue); line-height: 1; transition: transform .4s cubic-bezier(.2,.8,.2,1); transform-origin: left bottom; }
 .mini-digits .unit { font-size: 20px; color: var(--muted); }
+.mx:hover .mini-digits { transform: scale(1.04); }
+
+/* 08 · Smart Segments — node pulse + line data packets */
 .mini-network { position: relative; height: 90px; }
 .mini-network svg { width: 100%; height: 100%; overflow: visible; }
+.mini-network svg line { stroke-dasharray: 4 3; animation: net-packet 2.2s linear infinite; }
+.mini-network svg circle { transform-box: fill-box; transform-origin: center; animation: net-pulse 2.8s ease-in-out infinite; }
+.mini-network svg circle:nth-of-type(2) { animation-delay: .4s; }
+.mini-network svg circle:nth-of-type(3) { animation-delay: .8s; }
+.mini-network svg circle:nth-of-type(4) { animation-delay: 1.2s; }
+.mini-network svg circle:nth-of-type(5) { animation-delay: 1.6s; }
+@keyframes net-pulse { 0%, 75%, 100% { opacity: 1; transform: scale(1); } 38% { opacity: .55; transform: scale(1.15); } }
+@keyframes net-packet { to { stroke-dashoffset: -14; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mini-bars .b, .mini-pulse::before, .mini-pulse::after, .mini-circle, .mini-circle-wrap::before, .mini-circle-wrap::after, .mini-rows .r::after, .mini-network svg line, .mini-network svg circle, .mini-tree .t:last-child::after { animation: none !important; }
+  .mini-tree .t, .mini-pill { opacity: 1 !important; transform: none !important; }
+}
 .cta-nl { padding: 140px 32px; max-width: 1440px; margin: 0 auto; text-align: center; }
 .cta-nl h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(48px, 7vw, 100px); font-weight: 500; letter-spacing: -.035em; line-height: .96; margin: 20px 0 40px; color: var(--deep-blue); }
 .cta-nl h2 .it { font-style: italic; color: var(--emporia-blue); }
@@ -1099,8 +1168,8 @@ body { background: #fafbff; overflow-x: hidden; }
       <div class="mx reveal"><div class="mx-idx">02 / Advanced Targeting</div><h4>Advanced B2B <br/>Targeting</h4><div class="mx-visual"><div class="mini-bars"><div class="b" style="height:30%"></div><div class="b" style="height:55%"></div><div class="b" style="height:42%"></div><div class="b" style="height:72%"></div><div class="b" style="height:68%"></div><div class="b" style="height:85%"></div><div class="b" style="height:100%"></div><div class="b" style="height:78%"></div></div></div></div>
       <div class="mx reveal"><div class="mx-idx">03 / Respondent Mgmt</div><h4>Respondent <br/>Management</h4><div class="mx-visual"><div class="mini-rows"><div class="r"></div><div class="r"></div><div class="r"></div><div class="r"></div></div></div></div>
       <div class="mx reveal"><div class="mx-idx">04 / Survey Builder</div><h4>Simple Survey <br/>Builder</h4><div class="mx-visual"><div class="mini-tree"><div class="t" style="--d:0">survey.json</div><div class="t" style="--d:1">screener · 3 q</div><div class="t" style="--d:1">main · 12 q</div><div class="t" style="--d:2">maxdiff · 24 items</div><div class="t" style="--d:1">thank you</div></div></div></div>
-      <div class="mx reveal"><div class="mx-idx">05 / IDIs &amp; Groups</div><h4>Interviews &amp;<br/>Focus Groups</h4><div class="mx-visual" style="display:flex;align-items:center;justify-content:center;"><div class="mini-circle"></div></div></div>
-      <div class="mx reveal"><div class="mx-idx">06 / Smart Verification</div><h4>Smart <br/>Verification (Pori)</h4><div class="mx-visual"><div class="mini-pulse"></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;">0.41s avg · 99.2% precision</div></div></div>
+      <div class="mx reveal"><div class="mx-idx">05 / IDIs &amp; Groups</div><h4>Interviews &amp;<br/>Focus Groups</h4><div class="mx-visual" style="display:flex;align-items:center;justify-content:center;"><div class="mini-circle-wrap"><div class="mini-circle"></div></div></div></div>
+      <div class="mx reveal"><div class="mx-idx">06 / Smart Verification</div><h4>Smart <br/>Verification (Pori)</h4><div class="mx-visual"><div class="mini-pulse"><span class="core"></span></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;">0.41s avg · 99.2% precision</div></div></div>
       <div class="mx reveal"><div class="mx-idx">07 / LinkedIn OAuth</div><h4>Participant <br/>LinkedIn OAuth</h4><div class="mx-visual"><div><span class="mini-pill">name</span><span class="mini-pill">role</span><span class="mini-pill">firm</span><span class="mini-pill">seniority</span><span class="mini-pill">industry</span><span class="mini-pill">+195</span></div></div></div>
       <div class="mx reveal"><div class="mx-idx">08 / Smart Segments</div><h4>Smart Segment <br/>Management</h4><div class="mx-visual"><div class="mini-network"><svg viewBox="0 0 200 90"><line x1="20" y1="20" x2="70" y2="45" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="70" y1="45" x2="130" y2="20" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="70" y1="45" x2="130" y2="70" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="130" y1="20" x2="180" y2="45" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="130" y1="70" x2="180" y2="45" stroke="#3A29F9" stroke-width="1" opacity=".5"/><circle cx="20" cy="20" r="5" fill="#3A29F9"/><circle cx="70" cy="45" r="6" fill="#FF79D5"/><circle cx="130" cy="20" r="5" fill="#3A29F9"/><circle cx="130" cy="70" r="5" fill="#00C2FF"/><circle cx="180" cy="45" r="6" fill="#7812F9"/></svg></div></div></div>
     </div>
