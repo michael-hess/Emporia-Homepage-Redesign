@@ -552,15 +552,6 @@ body { background: #fafbff; overflow-x: hidden; }
 .testi-head { max-width: 1440px; margin: 0 auto 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
 .testi-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 5vw, 72px); line-height: .98; letter-spacing: -.03em; font-weight: 500; margin: 12px 0 0; color: var(--deep-blue); }
 .testi-head h2 .it { font-style: italic; color: var(--emporia-blue); }
-.testi-marquee { display: flex; gap: 20px; animation: marquee 60s linear infinite; width: max-content; }
-.testis:hover .testi-marquee { animation-play-state: paused; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.testi { width: 420px; flex-shrink: 0; background: #fff; border: 1px solid var(--rule); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; min-height: 280px; }
-.testi-quote { font-family: 'Space Grotesk', sans-serif; font-size: 17px; line-height: 1.5; color: var(--deep-blue); flex: 1; }
-.testi-who { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--rule); }
-.testi-ava { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--emporia-blue), var(--mint-pink)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px; flex-shrink: 0; }
-.testi-meta .n { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px; color: var(--deep-blue); }
-.testi-meta .r { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
 .matrix { padding: 140px 32px; max-width: 1440px; margin: 0 auto; }
 .matrix-head { margin-bottom: 60px; }
 .matrix-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(48px, 6vw, 88px); font-weight: 500; letter-spacing: -.03em; line-height: .96; margin: 12px 0 0; color: var(--deep-blue); }
@@ -602,34 +593,7 @@ body { background: #fafbff; overflow-x: hidden; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .cta-nl .ticker-bar-inner span { margin: 0 24px; }
 .cta-nl .ticker-bar-inner .n { color: var(--emporia-blue); font-weight: 600; }
-/* ---- Testimonial A/B compare labels ---- */
-.testi-compare-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 auto 28px; max-width: 1100px; display: flex; align-items: center; justify-content: center; gap: 14px; }
-.testi-compare-label::before, .testi-compare-label::after { content: ''; flex: 1; max-width: 90px; height: 1px; background: var(--rule); }
-.testi-compare-label .lbl { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 12px; color: var(--emporia-blue); letter-spacing: .06em; padding: 4px 10px; border: 1px solid rgba(58,41,249,.3); border-radius: 999px; background: rgba(58,41,249,.06); text-transform: none; }
-
-/* ---- Option 1 · Terminal feed ---- */
-.testi-terminal { background: #0b0f17; border-radius: 14px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(10,14,30,.35), 0 0 0 1px rgba(0,0,0,.06); max-width: 1100px; margin: 0 auto; }
-.tt-chrome { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.02); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,.45); }
-.tt-dot { width: 12px; height: 12px; border-radius: 50%; }
-.tt-dot.r { background: #ff5f57; }
-.tt-dot.y { background: #febc2e; }
-.tt-dot.g { background: #28c841; }
-.tt-title { margin-left: auto; }
-.tt-body { padding: 32px 36px 28px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.65; color: #e7ecf3; min-height: 360px; }
-.tt-line { opacity: 0; transform: translateY(6px); transition: opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); margin-bottom: 26px; }
-.tt-line.in { opacity: 1; transform: translateY(0); }
-.tt-meta { font-size: 11px; color: rgba(255,255,255,.4); margin-bottom: 4px; }
-.tt-meta .ts { color: #00C2FF; }
-.tt-meta .user { color: #FF79D5; }
-.tt-meta .role { color: rgba(255,255,255,.35); }
-.tt-quote { color: #e7ecf3; max-width: 880px; }
-.tt-quote::before { content: '> '; color: rgba(255,255,255,.3); }
-.tt-prompt { color: rgba(255,255,255,.4); font-size: 13px; margin-top: 8px; }
-.tt-prompt .p { color: #34d399; }
-.tt-cursor { display: inline-block; width: 8px; height: 14px; background: #00C2FF; vertical-align: -2px; margin-left: 4px; animation: tt-blink 1s step-end infinite; }
-@keyframes tt-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
-
-/* ---- Option 2 · Featured quote + rail ---- */
+/* ---- Testimonials · Featured quote + rail ---- */
 .testi-feature { max-width: 1100px; margin: 0 auto; padding: 48px 44px 40px; background: #fff; border: 1px solid var(--rule); border-radius: 18px; box-shadow: 0 30px 60px -30px rgba(4,0,76,.1); }
 .tf-quote-wrap { display: grid; }
 .tf-quote { grid-area: 1 / 1; opacity: 0; transition: opacity .55s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
@@ -648,10 +612,6 @@ body { background: #fafbff; overflow-x: hidden; }
 .tf-chip.active { border-color: var(--emporia-blue); background: rgba(58,41,249,.05); box-shadow: 0 4px 14px -4px rgba(58,41,249,.3); }
 .tf-chip-ava { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--emporia-blue), var(--mint-pink)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 11px; flex-shrink: 0; }
 .tf-chip-name { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500; color: var(--deep-blue); white-space: nowrap; }
-@media (prefers-reduced-motion: reduce) {
-  .tt-line { opacity: 1 !important; transform: none !important; }
-  .tt-cursor { animation: none; }
-}
 
 /* ---- Product card micro-animations ---- */
 .product-logo { transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .45s ease; will-change: transform; }
@@ -1122,18 +1082,6 @@ body { background: #fafbff; overflow-x: hidden; }
       <div><div class="eyebrow">// Operator feedback</div><h2>Don't take it <br/>from us, <span class="it">hear from</span> <br/>our users.</h2></div>
       <p style="font-size:17px;line-height:1.6;color:var(--muted);max-width:440px;margin:0;">Researchers, agencies, and enterprise teams using the Emporia stack to ship faster.</p>
     </div>
-    <div class="testi-compare-label"><span class="lbl">Option 1</span> Terminal feed</div>
-    <div class="testi-terminal" id="testi-terminal">
-      <div class="tt-chrome">
-        <div class="tt-dot r"></div><div class="tt-dot y"></div><div class="tt-dot g"></div>
-        <div class="tt-title">~ emporia/testimonials.log · tail -f</div>
-      </div>
-      <div class="tt-body" id="tt-body"></div>
-    </div>
-
-    <div style="height:96px;"></div>
-
-    <div class="testi-compare-label"><span class="lbl">Option 2</span> Featured quote + rail</div>
     <div class="testi-feature" id="testi-feature">
       <div class="tf-quote-wrap" id="tf-quote-wrap"></div>
       <div class="tf-progress"><div class="tf-progress-bar" id="tf-progress-bar"></div></div>
@@ -1487,31 +1435,7 @@ const chart=document.getElementById('viz-chart');if(chart){[22,38,45,30,58,64,52
   setInterval(push, 2800);
 })();
 const TESTIS=[{n:'Ted Pulsifer',r:'EVP · Sāgo',i:'TP',q:"Emporia's technology has streamlined how the industry accesses expert network sample. By programmatically connecting its users to experts, the team has made procuring in-depth interviews much more efficient and cost-effective than traditional methods. Emporia is a true game changer."},{n:'Elvis Lieban',r:'Sr. PMM · Gong',i:'EL',q:"Emporia gives us another perspective. Our product team does a really great job working with our existing customers. Emporia allows me to find new audiences and conduct that initial research that helps set the stage for potential new customers, products and markets."},{n:'Kerry Hecht',r:'Founder & CEO · 10K Humans',i:'KH',q:"Emporia is more than just a platform—the team is always ready to act as a strategic thought partner for us. Their openness to creative collaboration allows us to discover new ways of working."},{n:'Gary Pansino',r:'Managing Partner · Velodu',i:'GP',q:"We were thrilled with Emporia's excellent data quality, professionalism, responsiveness, and speed in delivering a very high-end, niche audience of investment fund managers and venture capital professionals."},{n:'Isabel Parashos',r:'Sr. Insights · Xero',i:'IP',q:"We are often trying to recruit hard to reach audiences and so it's imperative for us to have high quality data and verified respondents. Emporia go above and beyond to help us."},{n:'Kayte Hamilton',r:'Founder · The Social Question',i:'KH',q:"The growing Emporia team places high value on conversation and collaboration when it comes to bidding projects. You get a hybrid experience of DIY + expert guidance."}];
-/* Option 1 — Terminal feed */
-(function(){
-  const body=document.getElementById('tt-body');
-  const term=document.getElementById('testi-terminal');
-  if(!body||!term) return;
-  const handle=n=>n.toLowerCase().replace(/[^a-z\s]/g,'').trim().replace(/\s+/g,'.');
-  const pad=n=>String(n).padStart(2,'0');
-  TESTIS.forEach((t,i)=>{
-    const mins=2+i*7;
-    const h=14+Math.floor(mins/60);
-    const m=mins%60;
-    const line=document.createElement('div');
-    line.className='tt-line';
-    line.innerHTML=`<div class="tt-meta"><span class="ts">[${pad(h)}:${pad(m)}]</span> <span class="user">@${handle(t.n)}</span> <span class="role">// ${t.r}</span></div><div class="tt-quote">${t.q}</div>`;
-    body.appendChild(line);
-  });
-  const prompt=document.createElement('div');
-  prompt.className='tt-prompt';
-  prompt.innerHTML='<span class="p">emporia$</span> tail -f <span class="tt-cursor"></span>';
-  body.appendChild(prompt);
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){[...body.querySelectorAll('.tt-line')].forEach((el,i)=>setTimeout(()=>el.classList.add('in'),150+i*320));io.disconnect();}});},{threshold:.15});
-  io.observe(term);
-})();
-
-/* Option 2 — Featured quote + rail */
+/* Testimonials — Featured quote + rail */
 (function(){
   const wrap=document.getElementById('tf-quote-wrap');
   const rail=document.getElementById('tf-rail');
