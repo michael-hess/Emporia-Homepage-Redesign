@@ -580,12 +580,39 @@ body { background: #fafbff; overflow-x: hidden; }
 @keyframes radar-blip { 0%, 88% { opacity: 0; } 90%, 97% { opacity: 1; } 100% { opacity: 0; } }
 .mx:hover .mini-radar .sweep, .mx:hover .mini-radar .dot { animation-duration: 1.6s; }
 
-/* 06 · Pori — contained concentric verification pulse */
+/* 06 · Pori — concentric verification pulse + streaming request flow */
 .mini-pulse { width: 100%; height: 80px; position: relative; display: flex; align-items: center; justify-content: center; background: none; overflow: hidden; }
-.mini-pulse .core { width: 14px; height: 14px; border-radius: 50%; background: var(--emporia-blue); box-shadow: 0 0 12px rgba(58,41,249,.55); position: relative; z-index: 1; }
-.mini-pulse::before, .mini-pulse::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--emporia-blue); transform: translate(-50%, -50%); animation: pori-ring 2.6s cubic-bezier(.2,.8,.2,1) infinite; pointer-events: none; }
+.mini-pulse .core { width: 14px; height: 14px; border-radius: 50%; background: var(--emporia-blue); box-shadow: 0 0 12px rgba(58,41,249,.55); position: relative; z-index: 2; }
+.mini-pulse::before, .mini-pulse::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--emporia-blue); transform: translate(-50%, -50%); animation: pori-ring 2.6s cubic-bezier(.2,.8,.2,1) infinite; pointer-events: none; z-index: 1; }
 .mini-pulse::after { animation-delay: 1.3s; }
 @keyframes pori-ring { 0% { transform: translate(-50%, -50%) scale(.8); opacity: .85; } 85%, 100% { transform: translate(-50%, -50%) scale(3); opacity: 0; } }
+.mini-pulse .vreq { position: absolute; top: 50%; left: -10px; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: rgba(4,0,76,.45); opacity: 0; z-index: 0; animation: verify-pass 4.2s cubic-bezier(.45,.05,.55,.95) infinite; }
+.mini-pulse .vreq.bad { animation-name: verify-reject; }
+.mini-pulse .vreq:nth-child(2) { animation-delay: 0s; }
+.mini-pulse .vreq:nth-child(3) { animation-delay: .6s; }
+.mini-pulse .vreq:nth-child(4) { animation-delay: 1.2s; }
+.mini-pulse .vreq:nth-child(5) { animation-delay: 1.8s; }
+.mini-pulse .vreq:nth-child(6) { animation-delay: 2.4s; }
+.mini-pulse .vreq:nth-child(7) { animation-delay: 3.0s; }
+.mini-pulse .vreq:nth-child(8) { animation-delay: 3.6s; }
+@keyframes verify-pass {
+  0%   { left: -10px; opacity: 0; background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  6%   { opacity: 1; }
+  40%  { left: calc(50% - 3px); background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  48%  { left: calc(50% - 3px); background: var(--emporia-blue); transform: translateY(0) scale(1.55); box-shadow: 0 0 10px rgba(58,41,249,.8); }
+  56%  { left: calc(50% - 3px); background: var(--emporia-blue); transform: translateY(0) scale(1.1); box-shadow: 0 0 6px rgba(58,41,249,.6); }
+  92%  { left: calc(100% + 10px); opacity: 1; background: var(--emporia-blue); transform: translateY(0) scale(1); box-shadow: 0 0 4px rgba(58,41,249,.4); }
+  100% { left: calc(100% + 10px); opacity: 0; }
+}
+@keyframes verify-reject {
+  0%   { left: -10px; opacity: 0; background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  6%   { opacity: 1; }
+  40%  { left: calc(50% - 3px); background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  48%  { left: calc(50% - 3px); background: #E54B6F; transform: translateY(0) scale(1.55); box-shadow: 0 0 10px rgba(229,75,111,.8); }
+  58%  { left: calc(50% - 3px); background: #E54B6F; transform: translateY(4px) scale(1.05); box-shadow: 0 0 8px rgba(229,75,111,.6); }
+  92%  { left: calc(50% - 3px); transform: translateY(54px) scale(.6); opacity: 1; background: #E54B6F; box-shadow: 0 0 4px rgba(229,75,111,.3); }
+  100% { left: calc(50% - 3px); transform: translateY(60px) scale(.5); opacity: 0; }
+}
 
 /* 03 · Respondent — rows with gentle scan shimmer */
 .mini-rows { display: flex; flex-direction: column; gap: 6px; }
@@ -600,16 +627,20 @@ body { background: #fafbff; overflow-x: hidden; }
 .mini-rows .r:nth-child(4)::after { animation-delay: .9s; }
 @keyframes rows-scan { 0% { left: -45%; } 65%, 100% { left: 100%; } }
 
-/* 07 · LinkedIn OAuth — pills stagger-fade on reveal */
-.mini-pill { display: inline-block; padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--light-white); color: var(--emporia-blue); margin-right: 4px; margin-bottom: 4px; opacity: 0; transform: translateY(3px); transition: opacity .35s, transform .35s cubic-bezier(.2,.8,.2,1), background-color .25s; }
-.mx.reveal.in .mini-pill { opacity: 1; transform: translateY(0); }
-.mx.reveal.in .mini-pill:nth-child(1) { transition-delay: .2s, .2s, 0s; }
-.mx.reveal.in .mini-pill:nth-child(2) { transition-delay: .28s, .28s, 0s; }
-.mx.reveal.in .mini-pill:nth-child(3) { transition-delay: .36s, .36s, 0s; }
-.mx.reveal.in .mini-pill:nth-child(4) { transition-delay: .44s, .44s, 0s; }
-.mx.reveal.in .mini-pill:nth-child(5) { transition-delay: .52s, .52s, 0s; }
-.mx.reveal.in .mini-pill:nth-child(6) { transition-delay: .6s, .6s, 0s; }
-.mx:hover .mini-pill { background: rgba(58,41,249,.12); }
+/* 07 · LinkedIn OAuth — pills stagger-fade on reveal, gentle rolling verify highlight */
+.mini-pill { display: inline-block; padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--light-white); color: var(--emporia-blue); margin-right: 4px; margin-bottom: 4px; opacity: 0; transform: translateY(3px); transition: opacity .35s, transform .35s cubic-bezier(.2,.8,.2,1), background-color .25s, box-shadow .25s; }
+.mx.reveal.in .mini-pill { opacity: 1; transform: translateY(0); animation: pill-verify 7.2s ease-in-out infinite; }
+.mx.reveal.in .mini-pill:nth-child(1) { transition-delay: .2s, .2s, 0s, 0s; animation-delay: .6s; }
+.mx.reveal.in .mini-pill:nth-child(2) { transition-delay: .28s, .28s, 0s, 0s; animation-delay: 1.8s; }
+.mx.reveal.in .mini-pill:nth-child(3) { transition-delay: .36s, .36s, 0s, 0s; animation-delay: 3.0s; }
+.mx.reveal.in .mini-pill:nth-child(4) { transition-delay: .44s, .44s, 0s, 0s; animation-delay: 4.2s; }
+.mx.reveal.in .mini-pill:nth-child(5) { transition-delay: .52s, .52s, 0s, 0s; animation-delay: 5.4s; }
+.mx.reveal.in .mini-pill:nth-child(6) { transition-delay: .6s, .6s, 0s, 0s; animation-delay: 6.6s; }
+.mx:hover .mini-pill { background: rgba(58,41,249,.12); animation: none; box-shadow: none; }
+@keyframes pill-verify {
+  0%, 92%, 100% { background: var(--light-white); box-shadow: 0 0 0 0 rgba(58,41,249,0); }
+  5%, 12%       { background: rgba(58,41,249,.18); box-shadow: 0 0 0 2px rgba(58,41,249,.1); }
+}
 
 /* 05 · IDIs & Groups — spinning ring + concentric radiating waves */
 .mini-circle-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto; }
@@ -647,7 +678,7 @@ body { background: #fafbff; overflow-x: hidden; }
 @keyframes venn-breathe { 0%, 100% { transform: translate(calc(-50% + var(--x,0px)), calc(-50% + var(--y,0px))) scale(1); } 50% { transform: translate(calc(-50% + var(--x,0px)), calc(-50% + var(--y,0px))) scale(1.08); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .mini-radar .sweep, .mini-radar .dot, .mini-pulse::before, .mini-pulse::after, .mini-circle, .mini-circle-wrap::before, .mini-circle-wrap::after, .mini-rows .r::after, .mini-venn .v, .mini-tree .t:last-child::after { animation: none !important; }
+  .mini-radar .sweep, .mini-radar .dot, .mini-pulse::before, .mini-pulse::after, .mini-pulse .vreq, .mini-circle, .mini-circle-wrap::before, .mini-circle-wrap::after, .mini-rows .r::after, .mini-venn .v, .mini-tree .t:last-child::after, .mx.reveal.in .mini-pill { animation: none !important; }
   .mini-tree .t, .mini-pill { opacity: 1 !important; transform: none !important; }
 }
 .cta-nl { padding: 140px 32px; max-width: 1440px; margin: 0 auto; text-align: center; }
@@ -1167,7 +1198,7 @@ body { background: #fafbff; overflow-x: hidden; }
       <div class="mx reveal"><div class="mx-idx">03 / Respondent Mgmt</div><h4>Respondent <br/>Management</h4><div class="mx-visual"><div class="mini-rows"><div class="r"></div><div class="r"></div><div class="r"></div><div class="r"></div></div></div></div>
       <div class="mx reveal"><div class="mx-idx">04 / Survey Builder</div><h4>Simple Survey <br/>Builder</h4><div class="mx-visual"><div class="mini-tree"><div class="t" style="--d:0">survey.json</div><div class="t" style="--d:1">screener · 3 q</div><div class="t" style="--d:1">main · 12 q</div><div class="t" style="--d:2">maxdiff · 24 items</div><div class="t" style="--d:1">thank you</div></div></div></div>
       <div class="mx reveal"><div class="mx-idx">05 / IDIs &amp; Groups</div><h4>Interviews &amp;<br/>Focus Groups</h4><div class="mx-visual" style="display:flex;align-items:center;justify-content:center;"><div class="mini-circle-wrap"><div class="mini-circle"></div></div></div></div>
-      <div class="mx reveal"><div class="mx-idx">06 / Smart Verification</div><h4>Smart <br/>Verification (Pori)</h4><div class="mx-visual"><div class="mini-pulse"><span class="core"></span></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;">0.41s avg · 99.2% precision</div></div></div>
+      <div class="mx reveal"><div class="mx-idx">06 / Smart Verification</div><h4>Smart <br/>Verification (Pori)</h4><div class="mx-visual"><div class="mini-pulse"><span class="core"></span><span class="vreq"></span><span class="vreq"></span><span class="vreq bad"></span><span class="vreq"></span><span class="vreq"></span><span class="vreq bad"></span><span class="vreq"></span></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;">0.41s avg · 99.2% precision</div></div></div>
       <div class="mx reveal"><div class="mx-idx">07 / LinkedIn OAuth</div><h4>Participant <br/>LinkedIn OAuth</h4><div class="mx-visual"><div><span class="mini-pill">name</span><span class="mini-pill">role</span><span class="mini-pill">firm</span><span class="mini-pill">seniority</span><span class="mini-pill">industry</span><span class="mini-pill">+195</span></div></div></div>
       <div class="mx reveal"><div class="mx-idx">08 / Smart Segments</div><h4>Smart Segment <br/>Management</h4><div class="mx-visual"><div class="mini-venn"><div class="v v1"></div><div class="v v2"></div><div class="v v3"></div></div></div></div>
     </div>
