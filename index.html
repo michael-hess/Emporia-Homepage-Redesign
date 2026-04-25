@@ -488,10 +488,7 @@ body { background: #fafbff; overflow-x: hidden; }
 .products { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .product { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 32px; position: relative; overflow: hidden; transition: all .4s cubic-bezier(.2,.7,.2,1); display: flex; flex-direction: column; min-height: 520px; }
 .product:hover { transform: translateY(-6px); border-color: var(--emporia-blue); background: rgba(58,41,249,.12); }
-.product-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; padding: 5px 11px; border-radius: 999px; display: inline-flex; align-items: center; align-self: flex-start; color: rgba(255,255,255,.88); font-weight: 500; transition: background-color .3s, color .3s, border-color .3s; }
-.product-chip.chip-cust { background: rgba(0,194,255,.16); border: 1px solid rgba(0,194,255,.42); }
-.product-chip.chip-supp { background: rgba(120,18,249,.2); border: 1px solid rgba(120,18,249,.5); }
-.product-chip.chip-part { background: rgba(58,41,249,.2); border: 1px solid rgba(58,41,249,.5); }
+.product-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; padding: 5px 11px; border-radius: 999px; display: inline-flex; align-items: center; align-self: flex-start; color: rgba(255,255,255,.82); font-weight: 500; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); transition: background-color .3s, color .3s, border-color .3s; }
 .product:hover .product-chip.chip-cust { background: var(--soft-sky); color: #04004C; border-color: var(--soft-sky); }
 .product:hover .product-chip.chip-supp { background: #7812F9; color: #fff; border-color: #7812F9; }
 .product:hover .product-chip.chip-part { background: var(--emporia-blue); color: #fff; border-color: var(--emporia-blue); }
