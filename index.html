@@ -442,7 +442,7 @@ body { background: #fafbff; overflow-x: hidden; }
 .tm-av.agent-av svg { position: relative; z-index: 1; }
 .tm-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .tm-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; opacity: .55; text-transform: uppercase; letter-spacing: .1em; }
-.tm-name { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500; color: #fff; letter-spacing: -.005em; }
+.tm-name { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500; color: #fff; letter-spacing: -.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tm-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; margin-top: 3px; display: flex; align-items: center; gap: 5px; opacity: .75; }
 .tm-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .tm-status.on { color: #34d399; }
@@ -488,8 +488,10 @@ body { background: #fafbff; overflow-x: hidden; }
 .products { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .product { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 32px; position: relative; overflow: hidden; transition: all .4s cubic-bezier(.2,.7,.2,1); display: flex; flex-direction: column; min-height: 520px; }
 .product:hover { transform: translateY(-6px); border-color: var(--emporia-blue); background: rgba(58,41,249,.12); }
-.product-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; padding: 5px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.08); align-self: flex-start; }
-.product-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--soft-sky); }
+.product-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; padding: 6px 12px; border-radius: 999px; display: inline-flex; align-items: center; align-self: flex-start; color: #fff; font-weight: 500; background: var(--emporia-blue); }
+.product-chip.chip-cust { background: var(--soft-sky); color: #04004C; }
+.product-chip.chip-supp { background: #7812F9; }
+.product-chip.chip-part { background: var(--emporia-blue); }
 .product h3 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 500; letter-spacing: -.03em; margin: 24px 0 8px; }
 .product h3 .bracket { color: var(--mint-pink); font-weight: 300; }
 .product-logo { height: 44px; width: auto; max-width: 220px; margin: 22px 0 10px; display: block; object-fit: contain; object-position: left center; }
@@ -552,15 +554,6 @@ body { background: #fafbff; overflow-x: hidden; }
 .testi-head { max-width: 1440px; margin: 0 auto 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
 .testi-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 5vw, 72px); line-height: .98; letter-spacing: -.03em; font-weight: 500; margin: 12px 0 0; color: var(--deep-blue); }
 .testi-head h2 .it { font-style: italic; color: var(--emporia-blue); }
-.testi-marquee { display: flex; gap: 20px; animation: marquee 60s linear infinite; width: max-content; }
-.testis:hover .testi-marquee { animation-play-state: paused; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.testi { width: 420px; flex-shrink: 0; background: #fff; border: 1px solid var(--rule); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; min-height: 280px; }
-.testi-quote { font-family: 'Space Grotesk', sans-serif; font-size: 17px; line-height: 1.5; color: var(--deep-blue); flex: 1; }
-.testi-who { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--rule); }
-.testi-ava { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--emporia-blue), var(--mint-pink)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px; flex-shrink: 0; }
-.testi-meta .n { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px; color: var(--deep-blue); }
-.testi-meta .r { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
 .matrix { padding: 140px 32px; max-width: 1440px; margin: 0 auto; }
 .matrix-head { margin-bottom: 60px; }
 .matrix-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(48px, 6vw, 88px); font-weight: 500; letter-spacing: -.03em; line-height: .96; margin: 12px 0 0; color: var(--deep-blue); }
@@ -572,26 +565,122 @@ body { background: #fafbff; overflow-x: hidden; }
 .mx:hover { background: var(--light-white); }
 .mx .mx-idx { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .1em; }
 .mx h4 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -.02em; margin: 12px 0 0; color: var(--deep-blue); }
-.mx .mx-visual { flex: 1; margin-top: 18px; position: relative; }
-.mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 80px; }
-.mini-bars .b { flex: 1; background: var(--emporia-blue); border-radius: 2px 2px 0 0; opacity: .2; transition: opacity .3s; }
-.mx:hover .mini-bars .b { opacity: 1; }
-.mini-pulse { width: 100%; height: 80px; background: radial-gradient(circle, var(--emporia-blue) 0%, transparent 40%); opacity: .3; animation: pulse-bg 2s ease-in-out infinite; }
-@keyframes pulse-bg { 0%,100% { transform: scale(.8); opacity: .2; } 50% { transform: scale(1); opacity: .6; } }
+.mx .mx-visual { flex: 1; margin-top: 18px; position: relative; overflow: hidden; }
+/* 02 · Targeting — radar scope with sweep + target blips */
+.mini-radar { position: relative; width: 90px; height: 90px; margin: 0 auto; border-radius: 50%; border: 1px solid rgba(58,41,249,.3); display: flex; align-items: center; justify-content: center; }
+.mini-radar::before { content: ''; position: absolute; inset: 24px; border-radius: 50%; border: 1px dashed rgba(58,41,249,.25); }
+.mini-radar::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--emporia-blue); box-shadow: 0 0 6px rgba(58,41,249,.6); }
+.mini-radar .sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(58,41,249,0) 0deg, rgba(58,41,249,0) 300deg, rgba(58,41,249,.55) 358deg, rgba(58,41,249,0) 360deg); animation: radar-sweep 2.8s linear infinite; pointer-events: none; }
+.mini-radar .dot { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--mint-pink); box-shadow: 0 0 7px rgba(255,121,213,.75); opacity: 0; animation: radar-blip 2.8s linear infinite; }
+.mini-radar .dot:nth-child(2) { top: 22%; left: 62%; animation-delay: .35s; }
+.mini-radar .dot:nth-child(3) { top: 62%; left: 72%; animation-delay: 1.05s; }
+.mini-radar .dot:nth-child(4) { top: 70%; left: 26%; animation-delay: 1.8s; }
+.mini-radar .dot:nth-child(5) { top: 30%; left: 20%; animation-delay: 2.3s; }
+@keyframes radar-sweep { to { transform: rotate(360deg); } }
+@keyframes radar-blip { 0%, 88% { opacity: 0; } 90%, 97% { opacity: 1; } 100% { opacity: 0; } }
+.mx:hover .mini-radar .sweep, .mx:hover .mini-radar .dot { animation-duration: 1.6s; }
+
+/* 06 · Pori — concentric verification pulse + streaming request flow */
+.mini-pulse { width: 100%; height: 80px; position: relative; display: flex; align-items: center; justify-content: center; background: none; overflow: hidden; }
+.mini-pulse .core { width: 14px; height: 14px; border-radius: 50%; background: var(--emporia-blue); box-shadow: 0 0 12px rgba(58,41,249,.55); position: relative; z-index: 2; }
+.mini-pulse::before, .mini-pulse::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--emporia-blue); transform: translate(-50%, -50%); animation: pori-ring 2.6s cubic-bezier(.2,.8,.2,1) infinite; pointer-events: none; z-index: 1; }
+.mini-pulse::after { animation-delay: 1.3s; }
+@keyframes pori-ring { 0% { transform: translate(-50%, -50%) scale(.8); opacity: .85; } 85%, 100% { transform: translate(-50%, -50%) scale(3); opacity: 0; } }
+.mini-pulse .vreq { position: absolute; top: 50%; left: -10px; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: rgba(4,0,76,.45); opacity: 0; z-index: 0; animation: verify-pass 4.2s cubic-bezier(.45,.05,.55,.95) infinite; }
+.mini-pulse .vreq.bad { animation-name: verify-reject; }
+.mini-pulse .vreq:nth-child(2) { animation-delay: 0s; }
+.mini-pulse .vreq:nth-child(3) { animation-delay: .6s; }
+.mini-pulse .vreq:nth-child(4) { animation-delay: 1.2s; }
+.mini-pulse .vreq:nth-child(5) { animation-delay: 1.8s; }
+.mini-pulse .vreq:nth-child(6) { animation-delay: 2.4s; }
+.mini-pulse .vreq:nth-child(7) { animation-delay: 3.0s; }
+.mini-pulse .vreq:nth-child(8) { animation-delay: 3.6s; }
+@keyframes verify-pass {
+  0%   { left: -10px; opacity: 0; background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  6%   { opacity: 1; }
+  40%  { left: calc(50% - 3px); background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  48%  { left: calc(50% - 3px); background: var(--emporia-blue); transform: translateY(0) scale(1.55); box-shadow: 0 0 10px rgba(58,41,249,.8); }
+  56%  { left: calc(50% - 3px); background: var(--emporia-blue); transform: translateY(0) scale(1.1); box-shadow: 0 0 6px rgba(58,41,249,.6); }
+  92%  { left: calc(100% + 10px); opacity: 1; background: var(--emporia-blue); transform: translateY(0) scale(1); box-shadow: 0 0 4px rgba(58,41,249,.4); }
+  100% { left: calc(100% + 10px); opacity: 0; }
+}
+@keyframes verify-reject {
+  0%   { left: -10px; opacity: 0; background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  6%   { opacity: 1; }
+  40%  { left: calc(50% - 3px); background: rgba(4,0,76,.45); transform: translateY(0) scale(1); box-shadow: none; }
+  48%  { left: calc(50% - 3px); background: #E54B6F; transform: translateY(0) scale(1.55); box-shadow: 0 0 10px rgba(229,75,111,.8); }
+  58%  { left: calc(50% - 3px); background: #E54B6F; transform: translateY(4px) scale(1.05); box-shadow: 0 0 8px rgba(229,75,111,.6); }
+  92%  { left: calc(50% - 3px); transform: translateY(54px) scale(.6); opacity: 1; background: #E54B6F; box-shadow: 0 0 4px rgba(229,75,111,.3); }
+  100% { left: calc(50% - 3px); transform: translateY(60px) scale(.5); opacity: 0; }
+}
+
+/* 03 · Respondent — rows with gentle scan shimmer */
 .mini-rows { display: flex; flex-direction: column; gap: 6px; }
-.mini-rows .r { height: 10px; background: rgba(58,41,249,.15); border-radius: 2px; }
-.mini-rows .r:nth-child(1) { width: 85%; } .mini-rows .r:nth-child(2) { width: 60%; } .mini-rows .r:nth-child(3) { width: 92%; } .mini-rows .r:nth-child(4) { width: 45%; }
-.mini-pill { display: inline-block; padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--light-white); color: var(--emporia-blue); margin-right: 4px; margin-bottom: 4px; }
+.mini-rows .r { height: 10px; background: rgba(58,41,249,.15); border-radius: 2px; position: relative; overflow: hidden; }
+.mini-rows .r::after { content: ''; position: absolute; top: 0; left: -45%; width: 45%; height: 100%; background: linear-gradient(90deg, transparent, rgba(58,41,249,.5), transparent); animation: rows-scan 3.8s ease-in-out infinite; }
+.mini-rows .r:nth-child(1) { width: 85%; }
+.mini-rows .r:nth-child(2) { width: 60%; }
+.mini-rows .r:nth-child(2)::after { animation-delay: .3s; }
+.mini-rows .r:nth-child(3) { width: 92%; }
+.mini-rows .r:nth-child(3)::after { animation-delay: .6s; }
+.mini-rows .r:nth-child(4) { width: 45%; }
+.mini-rows .r:nth-child(4)::after { animation-delay: .9s; }
+@keyframes rows-scan { 0% { left: -45%; } 65%, 100% { left: 100%; } }
+
+/* 07 · LinkedIn OAuth — pills stagger-fade on reveal, gentle rolling verify highlight */
+.mini-pill { display: inline-block; padding: 6px 12px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--light-white); color: var(--emporia-blue); margin-right: 4px; margin-bottom: 4px; opacity: 0; transform: translateY(3px); transition: opacity .35s, transform .35s cubic-bezier(.2,.8,.2,1), background-color .25s, box-shadow .25s; }
+.mx.reveal.in .mini-pill { opacity: 1; transform: translateY(0); animation: pill-verify 7.2s ease-in-out infinite; }
+.mx.reveal.in .mini-pill:nth-child(1) { transition-delay: .2s, .2s, 0s, 0s; animation-delay: .6s; }
+.mx.reveal.in .mini-pill:nth-child(2) { transition-delay: .28s, .28s, 0s, 0s; animation-delay: 1.8s; }
+.mx.reveal.in .mini-pill:nth-child(3) { transition-delay: .36s, .36s, 0s, 0s; animation-delay: 3.0s; }
+.mx.reveal.in .mini-pill:nth-child(4) { transition-delay: .44s, .44s, 0s, 0s; animation-delay: 4.2s; }
+.mx.reveal.in .mini-pill:nth-child(5) { transition-delay: .52s, .52s, 0s, 0s; animation-delay: 5.4s; }
+.mx.reveal.in .mini-pill:nth-child(6) { transition-delay: .6s, .6s, 0s, 0s; animation-delay: 6.6s; }
+.mx:hover .mini-pill { background: rgba(58,41,249,.12); animation: none; box-shadow: none; }
+@keyframes pill-verify {
+  0%, 92%, 100% { background: var(--light-white); box-shadow: 0 0 0 0 rgba(58,41,249,0); }
+  5%, 12%       { background: rgba(58,41,249,.18); box-shadow: 0 0 0 2px rgba(58,41,249,.1); }
+}
+
+/* 05 · IDIs & Groups — spinning ring + concentric radiating waves */
+.mini-circle-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto; }
+.mini-circle-wrap::before, .mini-circle-wrap::after { content: ''; position: absolute; top: 50%; left: 50%; width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--emporia-blue); transform: translate(-50%, -50%); animation: circ-wave 2.8s ease-out infinite; pointer-events: none; opacity: 0; }
+.mini-circle-wrap::after { animation-delay: 1.4s; }
+@keyframes circ-wave { 0% { transform: translate(-50%, -50%) scale(.9); opacity: .4; } 85%, 100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; } }
 .mini-circle { width: 80px; height: 80px; border-radius: 50%; border: 2px dashed var(--emporia-blue); position: relative; animation: ring-spin 8s linear infinite; }
-.mini-circle::after { content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--mint-pink); }
+.mini-circle::after { content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--mint-pink); box-shadow: 0 0 10px rgba(255,121,213,.55); }
+
+/* 04 · Survey Builder — tree stagger + blinking caret */
 .mini-tree { display: flex; flex-direction: column; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
-.mini-tree .t { padding-left: calc(var(--d,0)*14px); }
+.mini-tree .t { padding-left: calc(var(--d,0)*14px); opacity: 0; transform: translateX(-4px); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
+.mx.reveal.in .mini-tree .t { opacity: 1; transform: translateX(0); }
+.mx.reveal.in .mini-tree .t:nth-child(1) { transition-delay: .18s; }
+.mx.reveal.in .mini-tree .t:nth-child(2) { transition-delay: .28s; }
+.mx.reveal.in .mini-tree .t:nth-child(3) { transition-delay: .38s; }
+.mx.reveal.in .mini-tree .t:nth-child(4) { transition-delay: .48s; }
+.mx.reveal.in .mini-tree .t:nth-child(5) { transition-delay: .58s; }
 .mini-tree .t::before { content: '└── '; opacity: .5; }
 .mini-tree .t:first-child::before { content: ''; }
-.mini-digits { font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.04em; color: var(--emporia-blue); line-height: 1; }
+.mini-tree .t:last-child::after { content: '▋'; color: var(--emporia-blue); margin-left: 4px; animation: tree-blink 1s step-end infinite; }
+@keyframes tree-blink { 50% { opacity: 0; } }
+
+/* 01 · Incentive — digits gently scale on hover */
+.mini-digits { font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 500; letter-spacing: -.04em; color: var(--emporia-blue); line-height: 1; transition: transform .4s cubic-bezier(.2,.8,.2,1); transform-origin: left bottom; }
 .mini-digits .unit { font-size: 20px; color: var(--muted); }
-.mini-network { position: relative; height: 90px; }
-.mini-network svg { width: 100%; height: 100%; overflow: visible; }
+.mx:hover .mini-digits { transform: scale(1.04); }
+
+/* 08 · Smart Segments — overlapping cluster circles breathe in place */
+.mini-venn { position: relative; width: 100%; height: 90px; }
+.mini-venn .v { position: absolute; top: 50%; left: 50%; width: 54px; height: 54px; border-radius: 50%; transform: translate(calc(-50% + var(--x,0px)), calc(-50% + var(--y,0px))) scale(1); animation: venn-breathe 3.2s ease-in-out infinite; }
+.mini-venn .v1 { --x: -22px; --y: -10px; background: rgba(58,41,249,.55); }
+.mini-venn .v2 { --x: 22px; --y: -10px; background: rgba(255,121,213,.55); animation-delay: .55s; }
+.mini-venn .v3 { --x: 0px; --y: 16px; background: rgba(0,194,255,.55); animation-delay: 1.1s; }
+@keyframes venn-breathe { 0%, 100% { transform: translate(calc(-50% + var(--x,0px)), calc(-50% + var(--y,0px))) scale(1); } 50% { transform: translate(calc(-50% + var(--x,0px)), calc(-50% + var(--y,0px))) scale(1.08); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mini-radar .sweep, .mini-radar .dot, .mini-pulse::before, .mini-pulse::after, .mini-pulse .vreq, .mini-circle, .mini-circle-wrap::before, .mini-circle-wrap::after, .mini-rows .r::after, .mini-venn .v, .mini-tree .t:last-child::after, .mx.reveal.in .mini-pill { animation: none !important; }
+  .mini-tree .t, .mini-pill { opacity: 1 !important; transform: none !important; }
+}
 .cta-nl { padding: 140px 32px; max-width: 1440px; margin: 0 auto; text-align: center; }
 .cta-nl h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(48px, 7vw, 100px); font-weight: 500; letter-spacing: -.035em; line-height: .96; margin: 20px 0 40px; color: var(--deep-blue); }
 .cta-nl h2 .it { font-style: italic; color: var(--emporia-blue); }
@@ -602,12 +691,52 @@ body { background: #fafbff; overflow-x: hidden; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .cta-nl .ticker-bar-inner span { margin: 0 24px; }
 .cta-nl .ticker-bar-inner .n { color: var(--emporia-blue); font-weight: 600; }
+/* ---- Testimonials · Featured quote + rail ---- */
+.testi-feature { max-width: 1100px; margin: 0 auto; padding: 48px 44px 40px; background: #fff; border: 1px solid var(--rule); border-radius: 18px; box-shadow: 0 30px 60px -30px rgba(4,0,76,.1); }
+.tf-quote-wrap { display: grid; }
+.tf-quote { grid-area: 1 / 1; opacity: 0; transition: opacity .55s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.tf-quote.active { opacity: 1; pointer-events: auto; }
+.tf-mark { font-family: 'Space Grotesk', sans-serif; font-size: 86px; line-height: 0; color: var(--emporia-blue); opacity: .35; display: block; height: 30px; }
+.tf-q-text { font-family: 'Space Grotesk', sans-serif; font-size: clamp(20px, 2.2vw, 28px); line-height: 1.4; color: var(--deep-blue); letter-spacing: -.01em; font-weight: 400; margin-top: 20px; }
+.tf-attr { display: flex; align-items: center; gap: 14px; margin-top: 32px; padding-top: 24px; border-top: 1px dashed var(--rule); }
+.tf-attr .tf-chip-ava { width: 44px; height: 44px; font-size: 14px; }
+.tf-name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; color: var(--deep-blue); }
+.tf-role { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.tf-progress { height: 2px; background: rgba(0,0,0,.06); border-radius: 999px; overflow: hidden; margin-top: 28px; }
+.tf-progress-bar { height: 100%; background: linear-gradient(90deg, var(--emporia-blue), var(--mint-pink)); width: 0; }
+.tf-rail { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+.tf-chip { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; background: #fff; border: 1px solid var(--rule); border-radius: 999px; cursor: pointer; transition: all .25s cubic-bezier(.2,.8,.2,1); font: inherit; }
+.tf-chip:hover { border-color: var(--emporia-blue); transform: translateY(-1px); }
+.tf-chip.active { border-color: var(--emporia-blue); background: rgba(58,41,249,.05); box-shadow: 0 4px 14px -4px rgba(58,41,249,.3); }
+.tf-chip-ava { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--emporia-blue), var(--mint-pink)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 11px; flex-shrink: 0; }
+.tf-chip-name { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500; color: var(--deep-blue); white-space: nowrap; }
+
+/* ---- Product card micro-animations ---- */
+.product-logo { transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .45s ease; will-change: transform; }
+.product:hover .product-logo { transform: translateY(-2px) scale(1.03); filter: drop-shadow(0 6px 14px rgba(58,41,249,.35)); }
+.product .pviz-attr { opacity: 0; transform: translateY(4px); transition: opacity .5s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.2,.8,.2,1), background-color .25s ease; }
+.product.reveal.in .pviz-attr { opacity: 1; transform: translateY(0); }
+.product.reveal.in .pviz-attr:nth-child(1) { transition-delay: .35s, .35s, 0s; }
+.product.reveal.in .pviz-attr:nth-child(2) { transition-delay: .45s, .45s, 0s; }
+.product.reveal.in .pviz-attr:nth-child(3) { transition-delay: .55s, .55s, 0s; }
+.product.reveal.in .pviz-attr:nth-child(4) { transition-delay: .65s, .65s, 0s; }
+.product:hover .pviz-attr:hover { background: rgba(58,41,249,.18); }
+.pviz-quota-fill { position: relative; overflow: hidden; }
+.pviz-quota-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.22) 50%, transparent 100%); transform: translateX(-120%); animation: bar-shimmer 4.5s ease-in-out 2.2s infinite; }
+@keyframes bar-shimmer { 0%, 10% { transform: translateX(-120%); } 55%, 100% { transform: translateX(260%); } }
+.pviz-polis-graph .endpoint-pulse { fill: none; stroke: var(--mint-pink); stroke-width: 1.2; opacity: 0; animation: endpoint-pulse 2.4s ease-out 2.4s infinite; }
+@keyframes endpoint-pulse { 0% { r: 4; opacity: .6; } 80% { opacity: 0; } 100% { r: 14; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .pviz-quota-fill::after, .pviz-polis-graph .endpoint-pulse { animation: none; }
+  .product .pviz-attr { opacity: 1; transform: none; }
+}
 @media (max-width: 960px) { .hero-split, .cap-head, .cap-display, .products, .testi-head { grid-template-columns: 1fr; } .matrix-grid { grid-template-columns: repeat(2,1fr); } .mx { border-right-width: 1px !important; } .mx:nth-child(2n) { border-right: 0 !important; } }
 </style>
 </head>
 <body>
 <div class="bg-grid"></div>
-<div id="nav-mount"></div>
+<!-- Nav intentionally removed for Webflow export; reserving height. -->
+<div id="nav-spacer" style="height:69px;"></div>
 <main class="page">
   <section class="hero">
     <div class="hero-split">
@@ -972,13 +1101,13 @@ body { background: #fafbff; overflow-x: hidden; }
       <h2 class="reveal">The Emporia ecosystem is <span class="it">purpose‑built for B2B.</span></h2>
       <div class="products">
         <div class="product reveal">
-          <span class="product-chip">For Customers</span>
+          <span class="product-chip chip-cust">For Customers</span>
           <img class="product-logo mrx" src="assets/mrxcore-logo.png" alt="mrxCore">
-          <p class="p-tagline">Your B2B audience command center. Built on nearly 800M professional records.</p>
+          <p class="p-tagline">Your B2B research command center. Built on top of over 800M verified professional records.</p>
           <div class="pviz">
             <div class="pviz-head"><span>verified records</span><span class="live">updating</span></div>
             <div>
-              <div class="pviz-bignum" data-bignum="807">0<span class="unit">M</span></div>
+              <div class="pviz-bignum"><span data-counter="888">0</span><span class="unit">M+</span></div>
               <div class="pviz-sublabel">professional profiles</div>
             </div>
             <div class="pviz-attrgrid">
@@ -991,9 +1120,9 @@ body { background: #fafbff; overflow-x: hidden; }
           <a href="#" class="p-link">Learn more →</a>
         </div>
         <div class="product reveal">
-          <span class="product-chip">For Suppliers</span>
+          <span class="product-chip chip-supp">For Suppliers</span>
           <img class="product-logo levada" src="assets/levada-logo.png" alt="Levada">
-          <p class="p-tagline">Best-in-class audience allocation tooling. Manage traffic, reconcile, and append metadata with clarity.</p>
+          <p class="p-tagline">Connect audiences to premium B2B surveys, expert interviews, and paid actions.</p>
           <div class="pviz">
             <div class="pviz-head"><span>fielding · fintech Q2</span><span class="live">live</span></div>
             <div class="pviz-quota-head"><span class="title">completes</span><span class="total">1,244 / 1,500</span></div>
@@ -1016,7 +1145,7 @@ body { background: #fafbff; overflow-x: hidden; }
           <a href="#" class="p-link">Learn more →</a>
         </div>
         <div class="product reveal">
-          <span class="product-chip">For Participants</span>
+          <span class="product-chip chip-part">For Participants</span>
           <img class="product-logo polis" src="assets/polis-logo.png" alt="Polis">
           <p class="p-tagline">Earn from your industry insights. Get paid for sharing your professional opinion.</p>
           <div class="pviz">
@@ -1035,6 +1164,7 @@ body { background: #fafbff; overflow-x: hidden; }
                 <path class="fill" d="M 0,88 L 30,82 L 60,74 L 90,68 L 120,60 L 150,46 L 180,40 L 210,30 L 240,22 L 270,14 L 300,8 L 300,100 L 0,100 Z"/>
                 <path class="line" d="M 0,88 L 30,82 L 60,74 L 90,68 L 120,60 L 150,46 L 180,40 L 210,30 L 240,22 L 270,14 L 300,8"/>
                 <circle class="endpoint" cx="300" cy="8"/>
+                <circle class="endpoint-pulse" cx="300" cy="8"/>
               </svg>
             </div>
             <div class="pviz-polis-axis-lbl"><span>jan</span><span>apr</span><span>jul</span><span>oct</span><span>now</span></div>
@@ -1050,7 +1180,11 @@ body { background: #fafbff; overflow-x: hidden; }
       <div><div class="eyebrow">// Operator feedback</div><h2>Don't take it <br/>from us, <span class="it">hear from</span> <br/>our users.</h2></div>
       <p style="font-size:17px;line-height:1.6;color:var(--muted);max-width:440px;margin:0;">Researchers, agencies, and enterprise teams using the Emporia stack to ship faster.</p>
     </div>
-    <div class="testi-marquee" id="testi-marquee"></div>
+    <div class="testi-feature" id="testi-feature">
+      <div class="tf-quote-wrap" id="tf-quote-wrap"></div>
+      <div class="tf-progress"><div class="tf-progress-bar" id="tf-progress-bar"></div></div>
+      <div class="tf-rail" id="tf-rail"></div>
+    </div>
   </section>
 
   <section class="matrix">
@@ -1059,14 +1193,14 @@ body { background: #fafbff; overflow-x: hidden; }
       <h2 class="reveal">The complete <br/><span class="it">B2B audience solution.</span></h2>
     </div>
     <div class="matrix-grid">
-      <div class="mx reveal"><div class="mx-idx">01 / Incentive Fulfillment</div><h4>Incentive <br/>Fulfillment</h4><div class="mx-visual"><div style="display:flex;align-items:baseline;gap:4px;"><span class="mini-digits">$2.4<span class="unit">M</span></span></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;">paid this month · 4,817 redemptions</div></div></div>
-      <div class="mx reveal"><div class="mx-idx">02 / Advanced Targeting</div><h4>Advanced B2B <br/>Targeting</h4><div class="mx-visual"><div class="mini-bars"><div class="b" style="height:30%"></div><div class="b" style="height:55%"></div><div class="b" style="height:42%"></div><div class="b" style="height:72%"></div><div class="b" style="height:68%"></div><div class="b" style="height:85%"></div><div class="b" style="height:100%"></div><div class="b" style="height:78%"></div></div></div></div>
+      <div class="mx reveal"><div class="mx-idx">01 / Incentive Fulfillment</div><h4>Incentive <br/>Fulfillment</h4><div class="mx-visual"><div style="display:flex;align-items:baseline;gap:4px;"><span class="mini-digits">$5<span class="unit">M+</span></span></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;">paid to respondents</div></div></div>
+      <div class="mx reveal"><div class="mx-idx">02 / Advanced Targeting</div><h4>Advanced B2B <br/>Targeting</h4><div class="mx-visual" style="display:flex;align-items:center;justify-content:center;"><div class="mini-radar"><span class="sweep"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div></div>
       <div class="mx reveal"><div class="mx-idx">03 / Respondent Mgmt</div><h4>Respondent <br/>Management</h4><div class="mx-visual"><div class="mini-rows"><div class="r"></div><div class="r"></div><div class="r"></div><div class="r"></div></div></div></div>
       <div class="mx reveal"><div class="mx-idx">04 / Survey Builder</div><h4>Simple Survey <br/>Builder</h4><div class="mx-visual"><div class="mini-tree"><div class="t" style="--d:0">survey.json</div><div class="t" style="--d:1">screener · 3 q</div><div class="t" style="--d:1">main · 12 q</div><div class="t" style="--d:2">maxdiff · 24 items</div><div class="t" style="--d:1">thank you</div></div></div></div>
-      <div class="mx reveal"><div class="mx-idx">05 / IDIs &amp; Groups</div><h4>Interviews &amp;<br/>Focus Groups</h4><div class="mx-visual" style="display:flex;align-items:center;justify-content:center;"><div class="mini-circle"></div></div></div>
-      <div class="mx reveal"><div class="mx-idx">06 / Smart Verification</div><h4>Smart <br/>Verification (Pori)</h4><div class="mx-visual"><div class="mini-pulse"></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;">0.41s avg · 99.2% precision</div></div></div>
+      <div class="mx reveal"><div class="mx-idx">05 / IDIs &amp; Groups</div><h4>Interviews &amp;<br/>Focus Groups</h4><div class="mx-visual" style="display:flex;align-items:center;justify-content:center;"><div class="mini-circle-wrap"><div class="mini-circle"></div></div></div></div>
+      <div class="mx reveal"><div class="mx-idx">06 / Smart Verification</div><h4>Smart <br/>Verification (Pori)</h4><div class="mx-visual"><div class="mini-pulse"><span class="core"></span><span class="vreq"></span><span class="vreq"></span><span class="vreq bad"></span><span class="vreq"></span><span class="vreq"></span><span class="vreq bad"></span><span class="vreq"></span></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;">0.41s avg · 99.2% precision</div></div></div>
       <div class="mx reveal"><div class="mx-idx">07 / LinkedIn OAuth</div><h4>Participant <br/>LinkedIn OAuth</h4><div class="mx-visual"><div><span class="mini-pill">name</span><span class="mini-pill">role</span><span class="mini-pill">firm</span><span class="mini-pill">seniority</span><span class="mini-pill">industry</span><span class="mini-pill">+195</span></div></div></div>
-      <div class="mx reveal"><div class="mx-idx">08 / Smart Segments</div><h4>Smart Segment <br/>Management</h4><div class="mx-visual"><div class="mini-network"><svg viewBox="0 0 200 90"><line x1="20" y1="20" x2="70" y2="45" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="70" y1="45" x2="130" y2="20" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="70" y1="45" x2="130" y2="70" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="130" y1="20" x2="180" y2="45" stroke="#3A29F9" stroke-width="1" opacity=".5"/><line x1="130" y1="70" x2="180" y2="45" stroke="#3A29F9" stroke-width="1" opacity=".5"/><circle cx="20" cy="20" r="5" fill="#3A29F9"/><circle cx="70" cy="45" r="6" fill="#FF79D5"/><circle cx="130" cy="20" r="5" fill="#3A29F9"/><circle cx="130" cy="70" r="5" fill="#00C2FF"/><circle cx="180" cy="45" r="6" fill="#7812F9"/></svg></div></div></div>
+      <div class="mx reveal"><div class="mx-idx">08 / Smart Segments</div><h4>Smart Segment <br/>Management</h4><div class="mx-visual"><div class="mini-venn"><div class="v v1"></div><div class="v v2"></div><div class="v v3"></div></div></div></div>
     </div>
   </section>
 
@@ -1085,7 +1219,6 @@ body { background: #fafbff; overflow-x: hidden; }
 <div id="footer-mount"></div>
 <script src="shared.js"></script>
 <script>
-document.getElementById('nav-mount').innerHTML = renderNav();
 document.getElementById('footer-mount').innerHTML = renderFooter();
 function animateCounter(el){const target=+el.dataset.counter;const suffix=el.dataset.suffix||'';const duration=1600;const start=performance.now();function step(now){const t=Math.min(1,(now-start)/duration);const e=1-Math.pow(1-t,3);el.textContent=Math.round(target*e).toLocaleString()+suffix;if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
 const cobs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);cobs.unobserve(e.target);}});},{threshold:.4});
@@ -1400,9 +1533,43 @@ const chart=document.getElementById('viz-chart');if(chart){[22,38,45,30,58,64,52
   setInterval(push, 2800);
 })();
 const TESTIS=[{n:'Ted Pulsifer',r:'EVP · Sāgo',i:'TP',q:"Emporia's technology has streamlined how the industry accesses expert network sample. By programmatically connecting its users to experts, the team has made procuring in-depth interviews much more efficient and cost-effective than traditional methods. Emporia is a true game changer."},{n:'Elvis Lieban',r:'Sr. PMM · Gong',i:'EL',q:"Emporia gives us another perspective. Our product team does a really great job working with our existing customers. Emporia allows me to find new audiences and conduct that initial research that helps set the stage for potential new customers, products and markets."},{n:'Kerry Hecht',r:'Founder & CEO · 10K Humans',i:'KH',q:"Emporia is more than just a platform—the team is always ready to act as a strategic thought partner for us. Their openness to creative collaboration allows us to discover new ways of working."},{n:'Gary Pansino',r:'Managing Partner · Velodu',i:'GP',q:"We were thrilled with Emporia's excellent data quality, professionalism, responsiveness, and speed in delivering a very high-end, niche audience of investment fund managers and venture capital professionals."},{n:'Isabel Parashos',r:'Sr. Insights · Xero',i:'IP',q:"We are often trying to recruit hard to reach audiences and so it's imperative for us to have high quality data and verified respondents. Emporia go above and beyond to help us."},{n:'Kayte Hamilton',r:'Founder · The Social Question',i:'KH',q:"The growing Emporia team places high value on conversation and collaboration when it comes to bidding projects. You get a hybrid experience of DIY + expert guidance."}];
-const tm=document.getElementById('testi-marquee');
-const rt=t=>`<div class="testi"><div class="testi-quote">"${t.q}"</div><div class="testi-who"><div class="testi-ava">${t.i}</div><div class="testi-meta"><div class="n">${t.n}</div><div class="r">${t.r}</div></div></div></div>`;
-tm.innerHTML=TESTIS.concat(TESTIS).map(rt).join('');
+/* Testimonials — Featured quote + rail */
+(function(){
+  const wrap=document.getElementById('tf-quote-wrap');
+  const rail=document.getElementById('tf-rail');
+  const bar=document.getElementById('tf-progress-bar');
+  const root=document.getElementById('testi-feature');
+  if(!wrap||!rail||!bar||!root) return;
+  TESTIS.forEach((t,i)=>{
+    const q=document.createElement('div');
+    q.className='tf-quote'+(i===0?' active':'');
+    q.dataset.idx=i;
+    q.innerHTML=`<span class="tf-mark">"</span><div class="tf-q-text">${t.q}</div><div class="tf-attr"><div class="tf-chip-ava">${t.i}</div><div><div class="tf-name">${t.n}</div><div class="tf-role">${t.r}</div></div></div>`;
+    wrap.appendChild(q);
+    const c=document.createElement('button');
+    c.type='button';
+    c.className='tf-chip'+(i===0?' active':'');
+    c.dataset.idx=i;
+    c.innerHTML=`<div class="tf-chip-ava">${t.i}</div><div class="tf-chip-name">${t.n}</div>`;
+    c.addEventListener('click',()=>setActive(i,true));
+    rail.appendChild(c);
+  });
+  let cur=0,rafId=null,start=0,running=false;const DUR=9000;
+  function setActive(i,user){
+    cur=i;
+    wrap.querySelectorAll('.tf-quote').forEach(el=>el.classList.toggle('active',+el.dataset.idx===i));
+    rail.querySelectorAll('.tf-chip').forEach(el=>el.classList.toggle('active',+el.dataset.idx===i));
+    if(user){start=performance.now();bar.style.width='0%';}
+  }
+  function tick(now){
+    const p=Math.min(1,(now-start)/DUR);
+    bar.style.width=(p*100)+'%';
+    if(p>=1){setActive((cur+1)%TESTIS.length);start=now;}
+    rafId=requestAnimationFrame(tick);
+  }
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!running){running=true;start=performance.now();rafId=requestAnimationFrame(tick);}else if(!e.isIntersecting&&running){running=false;cancelAnimationFrame(rafId);}});},{threshold:.25});
+  io.observe(root);
+})();
 enableReveals();
 </script>
 </body>
