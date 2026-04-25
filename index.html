@@ -488,10 +488,10 @@ body { background: #fafbff; overflow-x: hidden; }
 .products { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .product { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 32px; position: relative; overflow: hidden; transition: all .4s cubic-bezier(.2,.7,.2,1); display: flex; flex-direction: column; min-height: 520px; }
 .product:hover { transform: translateY(-6px); border-color: var(--emporia-blue); background: rgba(58,41,249,.12); }
-.product-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; padding: 5px 11px; border-radius: 999px; display: inline-flex; align-items: center; align-self: flex-start; color: #fff; font-weight: 500; background: var(--emporia-blue); }
-.product-chip.chip-cust { background: #B3EAFF; color: #04004C; }
-.product-chip.chip-supp { background: #B79CFC; color: #fff; }
-.product-chip.chip-part { background: #8E83FB; color: #fff; }
+.product-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; padding: 5px 11px; border-radius: 999px; display: inline-flex; align-items: center; align-self: flex-start; color: var(--deep-blue); font-weight: 500; background: rgba(4,0,76,.08); transition: background-color .3s, color .3s; }
+.product:hover .product-chip.chip-cust { background: var(--soft-sky); color: #04004C; }
+.product:hover .product-chip.chip-supp { background: #7812F9; color: #fff; }
+.product:hover .product-chip.chip-part { background: var(--emporia-blue); color: #fff; }
 .product h3 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 500; letter-spacing: -.03em; margin: 24px 0 8px; }
 .product h3 .bracket { color: var(--mint-pink); font-weight: 300; }
 .product-logo { height: 44px; width: auto; max-width: 220px; margin: 22px 0 10px; display: block; object-fit: contain; object-position: left center; }
@@ -1554,7 +1554,7 @@ const TESTIS=[{n:'Ted Pulsifer',r:'EVP · Sāgo',i:'TP',q:"Emporia's technology 
     c.addEventListener('click',()=>setActive(i,true));
     rail.appendChild(c);
   });
-  let cur=0,rafId=null,start=0,running=false;const DUR=9000;
+  let cur=0,rafId=null,start=0,running=false;const DUR=10000;
   function setActive(i,user){
     cur=i;
     wrap.querySelectorAll('.tf-quote').forEach(el=>el.classList.toggle('active',+el.dataset.idx===i));
