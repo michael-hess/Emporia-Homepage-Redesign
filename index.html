@@ -554,8 +554,8 @@ body { background: #fafbff; overflow-x: hidden; }
 .product .p-link { margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; opacity: .8; transition: opacity .2s, gap .2s; }
 .product:hover .p-link { opacity: 1; gap: 12px; color: var(--mint-pink); }
 .testis { padding: 140px 32px; max-width: 1600px; margin: 0 auto; overflow: hidden; }
-.testi-head { max-width: 1440px; margin: 0 auto 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
-.testi-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 5vw, 72px); line-height: .98; letter-spacing: -.03em; font-weight: 500; margin: 12px 0 0; color: var(--deep-blue); }
+.testi-head { max-width: 1440px; margin: 0 auto 60px; display: flex; flex-direction: column; gap: 28px; }
+.testi-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(48px, 6vw, 88px); line-height: .98; letter-spacing: -.03em; font-weight: 500; margin: 12px 0 0; color: var(--deep-blue); }
 .testi-head h2 .it { font-style: italic; color: var(--emporia-blue); }
 .matrix { padding: 140px 32px; max-width: 1440px; margin: 0 auto; }
 .matrix-head { margin-bottom: 60px; }
@@ -648,8 +648,8 @@ body { background: #fafbff; overflow-x: hidden; }
 /* 05 · IDIs & Groups — audio waveform pulsing across the tile */
 .mini-waveform { display: flex; align-items: center; justify-content: center; gap: 4px; height: 70px; width: 100%; }
 .mini-waveform .wb { width: 4px; height: 56px; border-radius: 2px; background: var(--emporia-blue); transform-origin: center; transform: scaleY(.15); animation: wf-bounce 1.1s ease-in-out infinite; }
-.mini-waveform .wb:nth-child(2), .mini-waveform .wb:nth-child(6), .mini-waveform .wb:nth-child(11) { background: var(--soft-sky); }
-.mini-waveform .wb:nth-child(4), .mini-waveform .wb:nth-child(9) { background: var(--mint-pink); }
+.mini-waveform .wb:nth-child(2), .mini-waveform .wb:nth-child(6), .mini-waveform .wb:nth-child(11) { background: rgba(58,41,249,.6); }
+.mini-waveform .wb:nth-child(4), .mini-waveform .wb:nth-child(9) { background: rgba(58,41,249,.32); }
 .mini-waveform .wb:nth-child(1) { animation-delay: -.05s; }
 .mini-waveform .wb:nth-child(2) { animation-delay: -.45s; }
 .mini-waveform .wb:nth-child(3) { animation-delay: -.85s; }
@@ -757,7 +757,7 @@ body { background: #fafbff; overflow-x: hidden; }
   .pviz-quota-fill::after, .pviz-polis-graph .endpoint-pulse { animation: none; }
   .product .pviz-attr { opacity: 1; transform: none; }
 }
-@media (max-width: 960px) { .hero-split, .cap-head, .cap-display, .products, .testi-head { grid-template-columns: 1fr; } .matrix-grid { grid-template-columns: repeat(2,1fr); } .mx { border-right-width: 1px !important; } .mx:nth-child(2n) { border-right: 0 !important; } }
+@media (max-width: 960px) { .hero-split, .cap-head, .cap-display, .products { grid-template-columns: 1fr; } .matrix-grid { grid-template-columns: repeat(2,1fr); } .mx { border-right-width: 1px !important; } .mx:nth-child(2n) { border-right: 0 !important; } }
 </style>
 </head>
 <body>
@@ -1204,7 +1204,7 @@ body { background: #fafbff; overflow-x: hidden; }
 
   <section class="testis">
     <div class="testi-head">
-      <div><div class="eyebrow">// Operator feedback</div><h2>Trusted by practitioners <br/>who <span class="it">demand <br/>data excellence</span>.</h2></div>
+      <div><div class="eyebrow">// Operator feedback</div><h2>Trusted by practitioners who <span class="it">demand data excellence</span>.</h2></div>
       <p style="font-size:17px;line-height:1.6;color:var(--muted);max-width:440px;margin:0;">Researchers, agencies, and enterprise teams using the Emporia stack to ship faster.</p>
     </div>
     <div class="testi-feature" id="testi-feature">
