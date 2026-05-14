@@ -707,16 +707,6 @@ body { background: #fafbff; overflow-x: hidden; }
   .mx.reveal.in .mini-segments .s4 { width: 14%; }
   .mini-tree .t, .mini-pill { opacity: 1 !important; transform: none !important; }
 }
-.cta-nl { padding: 140px 32px; max-width: 1440px; margin: 0 auto; text-align: center; }
-.cta-nl h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(48px, 7vw, 100px); font-weight: 500; letter-spacing: -.035em; line-height: .96; margin: 20px 0 40px; color: var(--deep-blue); }
-.cta-nl h2 .it { font-style: italic; color: var(--emporia-blue); }
-.cta-nl form { max-width: 520px; margin: 0 auto; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.cta-nl select { flex: 1; min-width: 300px; padding: 14px 20px; border-radius: 999px; border: 1px solid var(--rule); font-family: 'Open Sans', sans-serif; font-size: 14px; background: #fff; color: var(--deep-blue); }
-.cta-nl .ticker-bar { margin-top: 60px; padding: 16px 0; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule); overflow: hidden; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
-.cta-nl .ticker-bar-inner { display: inline-block; animation: ticker 40s linear infinite; padding-right: 20px; }
-@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.cta-nl .ticker-bar-inner span { margin: 0 24px; }
-.cta-nl .ticker-bar-inner .n { color: var(--emporia-blue); font-weight: 600; }
 /* ---- Testimonials · Featured quote + rail ---- */
 .testi-feature { max-width: 1100px; margin: 0 auto; padding: 48px 44px 40px; background: #fff; border: 1px solid var(--rule); border-radius: 18px; box-shadow: 0 30px 60px -30px rgba(4,0,76,.1); }
 .tf-quote-wrap { display: grid; }
@@ -1231,22 +1221,9 @@ body { background: #fafbff; overflow-x: hidden; }
     </div>
   </section>
 
-  <section class="cta-nl">
-    <div class="eyebrow">// Never miss a thing</div>
-    <h2>Join the<br/><span class="it">newsletter.</span></h2>
-    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Subscribed';">
-      <select><option>I work at a research agency</option><option>I work at a consulting firm</option><option>I work at a startup</option><option>I work at an enterprise company</option><option>I'm interested in research participation</option></select>
-      <button type="submit" class="btn btn-primary" style="padding:14px 28px;">Subscribe →</button>
-    </form>
-    <div class="ticker-bar"><div class="ticker-bar-inner">
-      <span><span class="n">807,241,192</span> verified professionals</span>·<span><span class="n">1,284</span> active projects</span>·<span><span class="n">41ms</span> avg match latency</span>·<span><span class="n">99.2%</span> verification precision</span>·<span><span class="n">2,000+</span> reward brands</span>·<span><span class="n">200+</span> targeting attributes</span>·<span><span class="n">140+</span> industries</span>·<span><span class="n">$2.4M</span> paid this month</span>·<span><span class="n">807,241,192</span> verified professionals</span>·<span><span class="n">1,284</span> active projects</span>·<span><span class="n">41ms</span> avg match latency</span>·<span><span class="n">99.2%</span> verification precision</span>·
-    </div></div>
-  </section>
 </main>
-<div id="footer-mount"></div>
 <script src="shared.js"></script>
 <script>
-document.getElementById('footer-mount').innerHTML = renderFooter();
 function animateCounter(el){const target=+el.dataset.counter;const suffix=el.dataset.suffix||'';const duration=1600;const start=performance.now();function step(now){const t=Math.min(1,(now-start)/duration);const e=1-Math.pow(1-t,3);el.textContent=Math.round(target*e).toLocaleString()+suffix;if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
 const cobs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);cobs.unobserve(e.target);}});},{threshold:.4});
 document.querySelectorAll('[data-counter]').forEach(el=>cobs.observe(el));
